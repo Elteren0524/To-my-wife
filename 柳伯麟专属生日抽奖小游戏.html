@@ -120,16 +120,22 @@
             }
         }
         function generateEmojis() {
-            const emojis = ['૮₍ ᵕoᵕ₎ა⭐', '💌(˶ᐢᗜᐢ˶)🧸', '♡＞₃＜♡', '૮₍ ˶ᵔᵕᵔ˶₎ა', '૮・ᴥ・ა 🐶', '🍰(｡◝ᴗ◜｡)', ' ૮ ˙Ⱉ˙ ა🎂', '🐱♡🐻', '(♡ˊ͈ ꒳ ˋ͈)', '(*¯︶¯*)'];
-            for (let i = 0; i < 30; i++) {
+            const emojis = ['૮₍ ᵕoᵕ₎ა⭐', '💌(˶ᐢᗜᐢ˶)🧸', '♡＞₃＜♡', '૮₍ ˶ᵔᵕᵔ˶₎ა', '૮・ᴥ・ა 🐶', '🍰(｡◝ᴗ◜｡)', ' ૮ ˙Ⱉ˙ ა🎂', '🐱♡🐻', '(♡ˊ͈ ꒳ ˋ͈)', '(*¯︶¯*)'];
+            const emojiContainer = document.createElement('div');
+            emojiContainer.classList.add('emoji-container');
+            document.body.appendChild(emojiContainer);
+            
+            for (let i = 0; i < 20; i++) {
                 let emoji = document.createElement('div');
                 emoji.classList.add('emoji-float');
                 emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
                 emoji.style.left = Math.random() * 100 + 'vw';
                 emoji.style.top = Math.random() * 100 + 'vh';
-                document.body.appendChild(emoji);
+                emojiContainer.appendChild(emoji);
             }
         }
+
+
         function emojiBurst() {
             const emojis = ['🎀', '🎂', '🎁', '💖', '💝', '🎉', '🐰', '🐻', '✨', '💗'];
             for (let i = 0; i < 30; i++) {
