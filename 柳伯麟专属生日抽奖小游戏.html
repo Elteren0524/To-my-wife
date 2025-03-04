@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>柳伯麟专属生日抽奖小游戏</title>
+    <style>
+        body {
+            text-align: center;
+            background: linear-gradient(to right, #FFC0CB, #ADD8E6);
+            font-family: Arial, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .emoji-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .emoji-float {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.7;
+            animation: float 10s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-10vh); }
+        }
+        @keyframes explode {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        .emoji-burst {
+            position: absolute;
+            font-size: 32px;
+            animation: explode 0.6s ease-out;
+        }
+        .container {
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        .title {
+            font-size: 36px;
+            color: #ffffff;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(255, 145, 180, 0.929);
+        }
+        .lottery-box {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            width: 80%;
+            max-width: 400px;
+        }
+        .button {
+            background: #ff69b4;
+            color: white;
+            font-size: 22px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background: #ff1493;
+            transform: scale(1.1);
+        }
+        .result {
+            font-size: 24px;
+            color: #333;
+            margin-top: 15px;
+            font-weight: bold;
+            transition: transform 0.3s ease-in-out;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let remainingPrizes = [
+            "本人清唱的生日快乐歌一曲",
+            "肯德基疯狂星期四基金：50大洋（微信领取）",
+            "昂克同人文一篇（寿星可以选定主题）",
+            "外卖奶茶一杯（白天送达，可任选）",
+            "桐真同人文一篇（寿星可以选定主题）",
+            "亲亲券一张",
+            "做爱券一张"
+        ];
+        let firstClick = true;
+
+        function drawPrize() {
+            let resultElement = document.getElementById("result");
+            let buttonElement = document.getElementById("drawButton");
+
+            if (remainingPrizes.length === 0) {
+                resultElement.innerText = "🎊 全部奖品已经抽完了懂不！🎊";
+                return;
+            }
+            
+            let randomIndex = Math.floor(Math.random() * remainingPrizes.length);
+            let prize = remainingPrizes.splice(randomIndex, 1)[0];
+            resultElement.innerText = "恭喜帕卡小宝宝获得额外生日礼物：\n\n" + prize + " 🎊";
+            alert("📸 请帕卡小宝宝截图留存！因为该奖品不会再出现啦！（你妻子技术有限）");
+            emojiBurst();
+            
+            if (firstClick) {
+                buttonElement.innerText = "🎁哼哼，再抽一次！";
+                firstClick = false;
+            }
+        }
+        function generateEmojis() {
+            const emojis = ['૮₍ ᵕoᵕ₎ა⭐', '💌(˶ᐢᗜᐢ˶)🧸', '♡＞₃＜♡', '૮₍ ˶ᵔᵕᵔ˶₎ა', '૮・ᴥ・ა 🐶', '🍰(｡◝ᴗ◜｡)', ' ૮ ˙Ⱉ˙ ა🎂', '🐱♡🐻', '(♡ˊ͈ ꒳ ˋ͈)', '(*¯︶¯*)'];
+            for (let i = 0; i < 30; i++) {
+                let emoji = document.createElement('div');
+                emoji.classList.add('emoji-float');
+                emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = Math.random() * 100 + 'vw';
+                emoji.style.top = Math.random() * 100 + 'vh';
+                document.body.appendChild(emoji);
+            }
+        }
+        function emojiBurst() {
+            const emojis = ['🎀', '🎂', '🎁', '💖', '💝', '🎉', '🐰', '🐻', '✨', '💗'];
+            for (let i = 0; i < 30; i++) {
+                let emoji = document.createElement('div');
+                emoji.classList.add('emoji-burst');
+                emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = (Math.random() * 80 + 10) + 'vw';
+                emoji.style.top = (Math.random() * 80 + 10) + 'vh';
+                document.body.appendChild(emoji);
+                setTimeout(() => { emoji.remove(); }, 600);
+            }
+        }
+        window.onload = function() {
+            alert("你好呀，帕卡小宝宝！今天是三月五号，终于到你的生日啦！祝老婆生日快乐…这已经是我陪老婆过的第二个生日了，以后还想给你更多惊喜…这是昨天跟你说写代码其实是写这个来着，希望你喜欢！生日快乐老婆❤️永远都最爱你了૮₍ ᵕoᵕ₎ა （这是我）");
+            generateEmojis();
+        }
+    </script>
+    <div class="container">
+        <h1 class="title">🐻小帕卡生日快乐 蛋糕都给你吃🐻</h1>
+        <div class="lottery-box">
+            <p style="font-size: 20px; font-weight: bold; color: #000000;">
+                🐻 额外的生日礼物🎁 领取须知 🐻
+            </p>
+            <p>请老婆点击下面的按钮，领取本宝为你另外准备的生日礼物</p>
+            <p>按钮必须由「柳伯麟」本人点击</p>
+            <p>任何他人尝试点击按钮，都会发现页面空无一物</p>
+            <p>请务必确认是「柳伯麟」在操作，否则礼物可能永远无法领取</p>
+            <button id="drawButton" class="button" onclick="drawPrize()">🎁我点！</button>
+            <p class="result" id="result">✨ 你的奖励会出现在这里 ✨</p>
+        </div>
+    </div>
+</body>
+</html>
