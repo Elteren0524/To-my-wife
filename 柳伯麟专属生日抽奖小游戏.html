@@ -40,6 +40,12 @@
             font-size: 32px;
             animation: explode 0.6s ease-out;
         }
+        .emoji-burst {
+            position: fixed;
+            font-size: 32px;
+            animation: explode 0.6s ease-out;
+            z-index: 9999;
+        }
         .container {
             margin-top: 50px;
             position: relative;
@@ -138,14 +144,15 @@
 
         function emojiBurst() {
             const emojis = ['🎀', '🎂', '🎁', '💖', '💝', '🎉', '🐰', '🐻', '✨', '💗'];
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 20; i++) {
                 let emoji = document.createElement('div');
                 emoji.classList.add('emoji-burst');
                 emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-                emoji.style.left = (Math.random() * 80 + 10) + 'vw';
-                emoji.style.top = (Math.random() * 80 + 10) + 'vh';
+                emoji.style.left = (Math.random() * 100) + 'vw';
+                emoji.style.top = (Math.random() * 100) + 'vh';
                 document.body.appendChild(emoji);
                 setTimeout(() => { emoji.remove(); }, 600);
+
             }
         }
         window.onload = function() {
